@@ -1,0 +1,39 @@
+{
+    "name": "Okul Aile Formu - Geliştirme Ortamı",
+    // Temel imaj: Python 3.11 içerir (Node ayrıca feature ile eklenecek)
+    "image": "mcr.microsoft.com/devcontainers/python:0-3.11-bullseye",
+
+    // Temel imaja eklenecek özellikler (features)
+    "features": {
+        // Docker komutlarını ve Docker Compose'u çalıştırabilmek için Docker-in-Docker özelliği
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        // Node.js'i de açıkça ekleyelim (LTS - Uzun Süreli Destek sürümü)
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        }
+    },
+
+    // Yönlendirilecek portlar (Django:8000, Postgres:5432)
+    "forwardPorts": [8000, 5432], // React için 3000 portunu ileride ekleyebiliriz
+
+    // Kurulacak VS Code Eklentileri
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "batisteo.vscode-django",
+                "ms-azuretools.vscode-docker",
+                "postgresql.vscode-postgresql",
+                "esbenp.prettier-vscode"
+                // Node/React ile ilgili eklentileri (örn: ESLint) ileride ekleyebiliriz
+            ]
+        }
+    },
+
+    // Konteyner oluşturulduktan sonra çalıştırılacak komutlar
+    "postCreateCommand": "echo '>>> Ortam başarıyla yapılandırıldı (Docker ve Node eklendi)! <<< HOSGELDINIZ' && python --version && node --version && docker --version && docker compose version",
+
+    // Kodları çalıştıracak kullanıcı (root olmayan 'vscode' kullanıcısı)
+    "remoteUser": "vscode"
+}

@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15 # PostgreSQL 15 sürümünü kullanacağız (veya 'latest')
+    restart: always
+    environment:
+      POSTGRES_DB: okulaileforumdb # Veritabanı adı
+      POSTGRES_USER: vscode # Kullanıcı adı (devcontainer ile aynı olsun)
+      POSTGRES_PASSWORD: password # Geliştirme için basit şifre
+    volumes:
+      # Verilerin kalıcı olması için bir volume tanımlıyoruz
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      # Veritabanına dışarıdan (örn: VSCode eklentisi) erişmek için port yönlendirme
+      - "5432:5432"
+
+volumes:
+  postgres_data: # Yukarıda kullanılan volume'ü tanımlıyoruz
